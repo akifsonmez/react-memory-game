@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import SingleCard from './components/SingleCard'
 
 const cardImages = [
@@ -19,6 +19,18 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
 
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        console.log("cards matched")
+      }
+      else {
+        console.log("cards did not match")
+      }
+      resetTurn()
+    }
+  }, [choiceOne, choiceTwo])
+
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
@@ -29,6 +41,12 @@ function App() {
 
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+  }
+
+  const resetTurn = () => {
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setTurnCount(prevCount => prevCount + 1)
   }
 
   return (
