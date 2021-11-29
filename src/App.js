@@ -32,12 +32,18 @@ function App() {
     }
   }, [choiceOne, choiceTwo])
 
+  useEffect(() => {
+    shuffleCards()
+  }, [])
+
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => { return { ...card, id: Math.random(), matched: false } })
     setCards(shuffledCards)
     setTurnCount(0)
+    setChoiceOne(null);
+    setChoiceTwo(null);
   }
 
   const handleChoice = (card) => {
@@ -65,6 +71,7 @@ function App() {
             disabled={choiceOne && choiceTwo}
           />))}
       </div>
+      <p>Turns: {turnCount}</p>
     </div>
   );
 }
