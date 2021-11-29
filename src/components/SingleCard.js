@@ -1,7 +1,7 @@
 import React from "react";
 import "./SingleCard.css"
 
-const SingleCard = ({ card, handleCoice }) => {
+const SingleCard = ({ card, handleCoice, flipped }) => {
 
     const handleClick = () => {
         handleCoice(card)
@@ -9,7 +9,7 @@ const SingleCard = ({ card, handleCoice }) => {
 
     return (
         <div className='card'>
-            <div>
+            <div className={flipped ? "flipped" : ""}>
                 <img className='front' src={card.src} alt="card front" />
                 <img
                     className='back'

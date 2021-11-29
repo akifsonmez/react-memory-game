@@ -28,7 +28,7 @@ function App() {
           else return card
         }))
       }
-      resetTurn()
+      setTimeout(resetTurn, 1000)
     }
   }, [choiceOne, choiceTwo])
 
@@ -50,7 +50,6 @@ function App() {
     setTurnCount(prevCount => prevCount + 1)
   }
 
-  console.log(cards)
 
   return (
     <div className="App">
@@ -62,6 +61,7 @@ function App() {
             card={card}
             key={card.id}
             handleCoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
           />))}
       </div>
     </div>
